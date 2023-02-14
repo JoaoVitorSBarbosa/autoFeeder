@@ -1,0 +1,9 @@
+//exemplo de preenchimento do arquivo defines.h
+
+#define NOME "Nome da Rede"
+#define SENHA "Sua senha"
+
+#define BOTtoken "XXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+#define CHAT_ID "XXXXXXXXXX"
+
+#define BOTDELAY 1000
