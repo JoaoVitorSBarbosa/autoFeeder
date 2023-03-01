@@ -60,10 +60,10 @@ void loop() {
                     Serial.println("Era pra alimentar");
                     funcs.giraServo();
                     tbot.sendMessage("Pet alimentado com sucesso!");
-                    delay(2 * 60 *1000);
+                    delay(1 * 60 *1000);
                 } else {
                     tbot.sendMessage("A refeição foi cancelada!");
-                    delay(2 * 60 *1000);
+                    delay(1 * 60 *1000);
                     tbot.cancelNext = false;
                 }
             } 
