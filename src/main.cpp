@@ -45,7 +45,7 @@ void setup() {
 
 void loop() {
     int horas = timeClient.getHours();
-    int minutos = timeClient.getMinutes() -3;
+    int minutos = timeClient.getMinutes();
     String horaAtual = String(horas) + ":" + (minutos < 10 ? ("0"+String(minutos)) : String(minutos));
     String horariosString = nvsMan.readString();
     int horariosNum = getNumHorarios(horariosString);
