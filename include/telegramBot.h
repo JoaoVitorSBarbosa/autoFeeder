@@ -19,7 +19,8 @@ class TelegramBot {
     void saveMessage(String chat_id);
 
    public:
+    bool cancelNext = false;
     TelegramBot();
     void respVerify();
-    void servoUpdate();
+    void sendMessage(String message);
 };

@@ -10,7 +10,6 @@ String inicio = DEFAULT_INIT;
 String intervalo = DEFAULT_INTERVAL;
 String quantidade = DEFAULT_QUANTIDY;
 String horarios = "";
-bool cancelNext = false;
 
 TelegramBot::TelegramBot() {
     client.setTrustAnchors(&cert);
@@ -57,7 +56,7 @@ void TelegramBot::startMessage(String from_name, String chat_id) {
 }
 void TelegramBot::initMessage(String chat_id) {
     bot.sendMessage(chat_id, "Digite o horário (numero inteiro de 0 a 23)", "");
-    while (inicio == "") {
+    while (inicio == "" || inicio == DEFAULT_INIT) {
         inicio = newResp();
     }
     bot.sendMessage(chat_id, "O primeiro horário selecionado foi " + inicio + " horas", "");
@@ -144,7 +143,7 @@ void TelegramBot::respVerify() {
     }
 }
 
-void TelegramBot::servoUpdate() {
+void TelegramBot::sendMessage(String message) {
     const String chat_id = CHAT_ID;
-    bot.sendMessage(chat_id, "Pet alimentado com sucesso!", "");
+    bot.sendMessage(chat_id, message, "");
 }

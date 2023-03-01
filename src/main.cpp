@@ -45,7 +45,7 @@ void setup() {
 
 void loop() {
     int horas = timeClient.getHours();
-    int minutos = timeClient.getMinutes() -20;
+    int minutos = timeClient.getMinutes() -3;
     String horaAtual = String(horas) + ":" + (minutos < 10 ? ("0"+String(minutos)) : String(minutos));
     String horariosString = nvsMan.readString();
     int horariosNum = getNumHorarios(horariosString);
@@ -53,12 +53,20 @@ void loop() {
         String horariosArray[horariosNum];
         getHorarios(horariosArray, horariosString);
         for (int i = 0; i < horariosNum; i++) {
+            Serial.println(horaAtual + " | " + horariosArray[i]);
             if (horaAtual == horariosArray[i]) {
-                Serial.println("Era pra alimentar");
-                funcs.giraServo();
-                tbot.servoUpdate();
-                delay(2 * 60 *1000);
-            }
+                Serial.println("Ta no horario");
+                if(!tbot.cancelNext) {
+                    Serial.println("Era pra alimentar");
+                    funcs.giraServo();
+                    tbot.sendMessage("Pet alimentado com sucesso!");
+                    delay(2 * 60 *1000);
+                } else {
+                    tbot.sendMessage("A refeição foi cancelada!");
+                    delay(2 * 60 *1000);
+                    tbot.cancelNext = false;
+                }
+            } 
         }
     }
     timeClient.update();
