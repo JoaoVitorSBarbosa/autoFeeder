@@ -44,6 +44,12 @@ void setup() {
 }
 
 void loop() {
+    while (SERVO_TEST) {
+        Servo servo;
+        servo.attach(SERVO_PIN);
+        funcs.giraServo();
+        Serial.println("Testando servo...");
+    }
     int horas = timeClient.getHours();
     int minutos = timeClient.getMinutes();
     String horaAtual = String(horas) + ":" + (minutos < 10 ? ("0"+String(minutos)) : String(minutos));

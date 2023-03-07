@@ -10,5 +10,4 @@ private:
 public:
     FuncsAux();
     void giraServo();
-    void getTime(); 
 };

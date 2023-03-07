@@ -1,10 +1,13 @@
 #include "../include/telegramBot.h"
 #include "../include/defines.h"
+#include "../include/funcsAux.h"
 
 X509List cert(TELEGRAM_CERTIFICATE_ROOT);
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);
 NVS nvs = NVS();
+
+FuncsAux fn = FuncsAux();
 
 String inicio = DEFAULT_INIT;
 String intervalo = DEFAULT_INTERVAL;
@@ -52,11 +55,12 @@ void TelegramBot::startMessage(String from_name, String chat_id) {
     welcome += "/salvar Para salvar as alterações \n";
     welcome += "/verHorarios Para ver os horarios de refeições do pet \n";
     welcome += "/cacelar Para cancelar a proxima refeição do pet \n";
+    welcome += "/agora Para alimentar o pet agora";
     bot.sendMessage(chat_id, welcome, "");
 }
 void TelegramBot::initMessage(String chat_id) {
     bot.sendMessage(chat_id, "Digite o horário (numero inteiro de 0 a 23)", "");
-    while (inicio == "" || inicio == DEFAULT_INIT) {
+    while (inicio == "") {
         inicio = newResp();
     }
     bot.sendMessage(chat_id, "O primeiro horário selecionado foi " + inicio + " horas", "");
@@ -128,6 +132,9 @@ void TelegramBot::handleNewMessages(int numNewMessages) {
             cancelMessage(chat_id);
         } else if (text == "/salvar") {
             saveMessage(chat_id);
+        } else if (text == "/agora"){
+            fn.giraServo();
+            bot.sendMessage(chat_id, "Pet alimentado!", "");
         } else {
             bot.sendMessage(chat_id, "Comando desconhecido", "");
         }
