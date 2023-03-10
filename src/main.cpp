@@ -41,6 +41,7 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     configTime(0, 0, "pool.ntp.org"); 
     wifi.init();
+    funcs.initServo();
 }
 
 void loop() {

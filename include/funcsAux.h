@@ -9,5 +9,6 @@ private:
 
 public:
     FuncsAux();
+    void initServo();
     void giraServo();
 };
